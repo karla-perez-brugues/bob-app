@@ -35,5 +35,5 @@ jobs:
       uses: actions/upload-artifact@v4
       if: success() || failure()
       with:
-          name: SpringBoot Report               # Name of the folder
-          path: target/site/serenity/           # Path to test results
+          name: SpringBoot Report                    # Name of the folder
+          path: back/target/site/serenity/           # Path to test results
