@@ -39,4 +39,4 @@ jobs:
       if: success() || failure()
       with:
           name: SpringBoot Report                    # Name of the folder
-          path: ./target/site/serenity/           # Path to test results
+          path: back/target/site/serenity/           # Path to test results
