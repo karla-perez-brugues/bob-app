@@ -18,6 +18,9 @@ jobs:
   build:
  
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./back
  
     steps:
     - uses: actions/checkout@v4
@@ -36,4 +39,4 @@ jobs:
       if: success() || failure()
       with:
           name: SpringBoot Report                    # Name of the folder
-          path: back/target/site/serenity/           # Path to test results
+          path: target/site/serenity/           # Path to test results
