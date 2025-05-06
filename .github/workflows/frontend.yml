@@ -4,10 +4,11 @@
 name: Frontend CI
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - 'front/**'
 
 jobs:
   build:
@@ -21,27 +22,29 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: front/package.json
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: front/package.json
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm build
+      - name: Build
+        run: npm build
 
-    - name: Tests
-      run: npm test --no-watch --browsers=ChromeHeadless --code-coverage
+      - name: Tests
+        run: npm test --no-watch --browsers=ChromeHeadless --code-coverage
 
-    - name: Code coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: code-coverage-report
-        path: ${{ github.workspace }}/front/coverage/bobapp/**
+      - name: Code coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: ${{ github.workspace }}/front/coverage/bobapp/**
