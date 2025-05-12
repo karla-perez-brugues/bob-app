@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build and Test Java Spring Boot Application 
+name: Backend CI
  
 on:
   push:
