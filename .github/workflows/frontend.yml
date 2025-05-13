@@ -34,7 +34,6 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
-# TODO: create test job
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -77,7 +76,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
           SONAR_BRANCH_NAME: main
 
-# TODO: create docker job
   docker:
     needs: test
     runs-on: ubuntu-latest
