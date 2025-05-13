@@ -27,7 +27,14 @@ jobs:
     - name: Build with Maven
       run: mvn clean verify
 
-    # create job test
+  # create job test
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./back
+
+    steps:
     - name: Run tests
       run: mvn clean test
 
@@ -37,30 +44,10 @@ jobs:
         name: coverage_backend
         path: ${{ github.workspace }}/back/target/site/jacoco
 
-#    - name: Cache SonarQube packages
-#      uses: actions/cache@v4
-#      with:
-#        path: ~/.sonar/cache
-#        key: ${{ runner.os }}-sonar
-#        restore-keys: ${{ runner.os }}-sonar
-
-#    - name: Cache Maven packages
-#      uses: actions/cache@v4
-#      with:
-#        path: ~/.m2
-#        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#        restore-keys: ${{ runner.os }}-m2
-
     - name: Build and analyze
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=karla-perez-brugues_bob-app
-
-#    - name: Extract Docker image metadata
-#      id: meta
-#      uses: docker/metadata-action@v5
-#      with:
-#        images: ${{ vars.DOCKER_USERNAME }}/bob-app-back
 
     # create job docker
     - name: Log in to Docker Hub
