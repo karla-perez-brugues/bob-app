@@ -70,7 +70,7 @@ jobs:
           path: ${{ github.workspace }}/front/coverage/bobapp/**
 
       - name: Scan SonarCloud
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@master
         with:
           projectBaseDir: front
         env:
@@ -78,6 +78,16 @@ jobs:
           SONAR_BRANCH_NAME: main
 
 # TODO: create docker job
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
