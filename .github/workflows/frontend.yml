@@ -2,10 +2,7 @@ name: Frontend CI
 
 on:
   pull_request:
-    branches:
-      - main
-    paths:
-      - 'front/**'
+    branches: [ "main" ]
 
 jobs:
   build:

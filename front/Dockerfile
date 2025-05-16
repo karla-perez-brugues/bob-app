@@ -12,4 +12,3 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /usr/local/app/dist/bobapp /usr/share/nginx/html
 
 EXPOSE 80
-# test pipeline
